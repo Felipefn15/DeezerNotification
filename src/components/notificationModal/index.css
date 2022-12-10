@@ -1,0 +1,71 @@
+.modalBackground {
+  position: absolute;
+  height: 85%;
+  width: 100%;
+  background-color: rgb(0, 0, 0, 10%);
+  top: 15%;
+}
+
+.modalWrapper {
+  width: 320px;
+  height: 90%;
+  min-height: 300px;
+  background-color: #23232c;
+  border-radius: 30px;
+  position: absolute;
+  right: 30px;
+  top: 2%;
+  padding: 5px;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.titleWrapper {
+  border-bottom: 2px solid #282832;
+}
+
+.title {
+  margin: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.cardsWrapper {
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+}
+
+.noNotificationText {
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+}
