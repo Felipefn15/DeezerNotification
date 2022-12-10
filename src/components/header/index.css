@@ -54,7 +54,7 @@
   border-radius: 50%;
 }
 
-.quantityNotifications{
+.quantityNotifications {
   position: absolute;
   top: 0;
   background-color: gray;
@@ -64,7 +64,10 @@
   text-align: center;
   color: white;
   font-weight: 700;
-  font-size: 18;
+  font-size: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 700px) {

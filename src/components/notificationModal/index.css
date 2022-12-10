@@ -8,7 +8,7 @@
 
 .modalWrapper {
   width: 320px;
-  height: 90%;
+  height: 95%;
   min-height: 300px;
   background-color: #23232c;
   border-radius: 30px;
@@ -56,7 +56,7 @@
 }
 
 .cardsWrapper {
-  overflow-y: scroll;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   height: 85%;
