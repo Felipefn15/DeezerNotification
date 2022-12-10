@@ -85,11 +85,13 @@ function NotificationModal(props: notificationModalProps) {
             return;
         }
         else {
-            const newData = data
-            newData.push(...data)
-            setData(newData)
-            localStorage.setItem('quantity', JSON.stringify(newData.length - readItems.length));
-            window.dispatchEvent(new Event("storage"));
+            if (data.length < 100) {
+                const newData = data
+                newData.push(...data)
+                setData(newData)
+                localStorage.setItem('quantity', JSON.stringify(newData.length - readItems.length));
+                window.dispatchEvent(new Event("storage"));
+            }
         }
     }
 
