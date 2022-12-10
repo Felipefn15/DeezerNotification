@@ -33,4 +33,6 @@ export interface card {
 
 export interface notificationCardProps {
     card: card
+    read: () => void,
+    wasRead: boolean
 }

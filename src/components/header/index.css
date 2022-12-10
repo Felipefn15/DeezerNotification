@@ -1,54 +1,63 @@
-.headerWrapper{
-    height: 15vh;
-    background-color: #1f1e2c;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.headerWrapper {
+  height: 15vh;
+  background-color: #1f1e2c;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.logoHeader{
-    height: 80px;
-    width: 150px;
+.logoHeader {
+  height: 80px;
+  width: 150px;
 }
 
-.linksWrapper{
-    display: flex;
-    flex-direction: row;
-    width: 65%;
+.linksWrapper {
+  display: flex;
+  flex-direction: row;
+  width: 65%;
 }
 
-.link{
-    color: gray;
-    text-decoration: none;
-    margin: 0px 20px 0px 20px;
+.link {
+  color: gray;
+  text-decoration: none;
+  margin: 0px 20px 0px 20px;
 }
 
-.rightWrapper{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    width: 30%;
-    margin-right: 10px;
+.rightWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 30%;
+  margin-right: 10px;
 }
 
-.rightIcon{
-    height: 40px;
-    
-    cursor: pointer;
+.rightIcon {
+  height: 40px;
+
+  cursor: pointer;
 }
 
-.notificationButton{
-    margin-right: 10%;
-    background-color: transparent;
-    border: 0px;
+.notificationButton {
+  margin-right: 10%;
+  background-color: transparent;
+  border: 0px;
 }
 
-.notificationButton:hover{
-    background-color: rgb(20,20,20,30%);
-    border-radius: 50%;
+.notificationButton:hover {
+  background-color: rgb(20, 20, 20, 30%);
+  border-radius: 50%;
 }
 
-.notificationButton:active{
-    background-color: rgb(20,20,20,80%);
-    border-radius: 50%;
+.notificationButton:active {
+  background-color: rgb(20, 20, 20, 80%);
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 700px) {
+  .headerWrapper {
+    justify-content: space-between;
+  }
+  .linksWrapper {
+    display: none;
+  }
 }

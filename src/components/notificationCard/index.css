@@ -2,11 +2,22 @@
   width: 100%;
   height: 130px;
   background-color: transparent;
+  border: 0px;
   margin-bottom: 10px;
+}
+
+.read {
+  background-color: #1e1e20;
 }
 
 .cardWrapper:hover {
   background-color: #42424b;
+}
+
+.cardPrincipal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .infoWrapper {
@@ -22,34 +33,45 @@
   border-radius: 10px;
 }
 
-.textWrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
 }
 
-.cardTitle{
-    color: white;
-    font-size: 17px;
-    font-weight: 700;
-    margin: 0px;
-    margin-bottom: 5px;
+.cardTitle {
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0px;
+  margin-bottom: 5px;
 }
 
-.cardSubtitle{
-    color: #949497;
-    font-size: 12px;
-    font-weight: 500;
-    margin: 0px;
+.cardSubtitle {
+  color: #949497;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0px;
 }
 
-.footerWrapper{
-    margin: 0px 10px 0px 10px;
+.readButton {
+  background-color: transparent;
+  border: 0px;
 }
 
-.footerText{
-    color: #5a5a63;
-    font-size: 12px;
-    font-weight: 200;
-    text-transform: uppercase;
+.mailIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.footerWrapper {
+  margin: 0px 10px 0px 10px;
+}
+
+.footerText {
+  color: #5a5a63;
+  font-size: 12px;
+  font-weight: 200;
+  text-transform: uppercase;
 }
