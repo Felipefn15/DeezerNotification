@@ -8,14 +8,14 @@ import samSmith from "../../assets/mock/sm.png"
 import marronFive from "../../assets/mock/mr5.png"
 import arianaGrande from "../../assets/mock/argr.png"
 import podcast from "../../assets/mock/podcast.jpg"
-
+//Mock Initial Data
 const mockData: card[] = [
     {
         type: "recommendation",
         attachedContent: {
             title: "Free Spirit",
             subtitle: "Khalid",
-            date: "5 Days ago",
+            date: new Date("10/10/2022"),
             type: "Album",
             image: khalidImage
         },
@@ -25,7 +25,7 @@ const mockData: card[] = [
         attachedContent: {
             title: "Origins",
             subtitle: "Imagine Dragons",
-            date: "2 Months ago",
+            date: new Date("10/20/2022"),
             type: "Album",
             image: imagineDragon
         },
@@ -35,7 +35,7 @@ const mockData: card[] = [
         attachedContent: {
             title: "Unholly",
             subtitle: "Sam Smith",
-            date: "1 Week ago",
+            date: new Date("10/30/2022"),
             type: "Single",
             image: samSmith
         },
@@ -45,7 +45,7 @@ const mockData: card[] = [
         attachedContent: {
             title: "This is",
             subtitle: "Marron Five",
-            date: "1 Month ago",
+            date: new Date("11/10/2022"),
             type: "Playlist",
             image: marronFive
         },
@@ -55,7 +55,7 @@ const mockData: card[] = [
         attachedContent: {
             title: "Sweetener",
             subtitle: "Ariana Grande",
-            date: "1 day ago",
+            date: new Date("11/30/2022"),
             type: "Album",
             image: arianaGrande
         },
@@ -65,7 +65,7 @@ const mockData: card[] = [
         attachedContent: {
             title: "StarTalk",
             subtitle: "Neil deGrasse Tyson",
-            date: "1 day ago",
+            date: new Date("12/10/2022"),
             type: "Podcast",
             image: podcast
         },
@@ -74,20 +74,25 @@ const mockData: card[] = [
 ]
 
 
-
 function NotificationModal(props: notificationModalProps) {
     const [data, setData] = useState<card[]>(mockData)
+    const [hide] = useState(false)
     const [readItems, setReadItems] = useState<number[]>([])
 
-
+    /*
+    *   Used to create the Infinity Scroll fealing, everytime that hits the bottom
+    *   will be added more itens until get bigger than 90 itens
+    *   I choosed 90 just because of the volume, but this a example
+    */
     function isScrolling(event: any) {
-        if (event.currentTarget.offsetHeight + event.currentTarget.scrollTop !== event.currentTarget.scrollHeight) {
+        if (event.currentTarget.offsetHeight + event.currentTarget.scrollTop + 1 < event.currentTarget.scrollHeight) {
             return;
         }
         else {
-            if (data.length < 100) {
+            if (data.length < 90) {
                 const newData = data
-                newData.push(...data)
+                newData.push(...mockData)
+                console.log({ newData })
                 setData(newData)
                 localStorage.setItem('quantity', JSON.stringify(newData.length - readItems.length));
                 window.dispatchEvent(new Event("storage"));
@@ -95,17 +100,21 @@ function NotificationModal(props: notificationModalProps) {
         }
     }
 
+    //Used to set the quantity of the notifications the first time after load the fake data
     useEffect(() => {
         localStorage.setItem('quantity', JSON.stringify(data.length - readItems.length));
-        window.addEventListener("scroll", isScrolling);
-        return () => window.removeEventListener("scroll", isScrolling);
     },)
 
-
+    //This function check if the notification was read and return the array possition
     const checkRead = (index: number) => {
         return readItems.indexOf(index)
     }
 
+    /*
+    *   If the index exists on the read array, will be removed
+    *   If is not there yet, will be added
+    *   After that create the new list of read notifications and save this on local storage
+    */
     const insertReadCard = (index: number) => {
         const newRead = readItems
         const position = checkRead(index)
@@ -118,6 +127,21 @@ function NotificationModal(props: notificationModalProps) {
         window.dispatchEvent(new Event("storage"));
     }
 
+    /*
+    *   Create the list of notifications card based on the date of the notification, newest to oldest
+    */
+    const getSortedData = () => {
+        return data.sort((card1, card2) => {
+            if (card1.attachedContent?.date && card2.attachedContent)
+                return card1.attachedContent.date.getTime() - card2.attachedContent.date.getTime()
+            else
+                return 1
+        })
+    }
+
+    /*
+    *   Check if the button turn the show true, if so, show the modal
+    */
     if (props.show)
         return (
             <div className="modalBackground">
@@ -126,8 +150,8 @@ function NotificationModal(props: notificationModalProps) {
                         <p className="title">Notifications</p>
                     </div>
                     <div className="cardsWrapper" onScroll={isScrolling}>
-                        {data.length > 0 ?
-                            data.map((card, index) => {
+                        {data.length > 0 && !hide ?
+                            getSortedData().map((card, index) => {
                                 return (
                                     <NotificationCard key={index} card={card} read={() => insertReadCard(index)} wasRead={checkRead(index) > -1} />
                                 )

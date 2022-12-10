@@ -19,7 +19,7 @@ export interface notificationModalProps {
 export interface content {
     title: string,
     subtitle: string,
-    date: string,
+    date: Date,
     image: string,
     type: string,
 }

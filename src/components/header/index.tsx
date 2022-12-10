@@ -9,6 +9,11 @@ function Header() {
   const [openModal, setOpenModal] = useState(false)
   const [quantity, setQuantity] = useState(0)
 
+  /*
+  * Get the first value on notifications quantity from local storage
+  * create a listiner to get any change on the quantity value 
+  */
+
   useEffect(() => {
     setQuantity(Number(JSON.parse(localStorage.getItem('quantity') || "")) || 0)
     window.addEventListener('storage', () => {
@@ -16,6 +21,9 @@ function Header() {
     });
   }, [])
 
+  /*
+  * Switch modal showing propety
+  */
 
   const controlModal = () => {
     setOpenModal(!openModal)
