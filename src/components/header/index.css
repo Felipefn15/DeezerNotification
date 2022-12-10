@@ -7,8 +7,9 @@
 }
 
 .logoHeader {
-  height: 80px;
+  height: auto;
   width: 150px;
+  margin-left: 10px;
 }
 
 .linksWrapper {
@@ -51,6 +52,19 @@
 .notificationButton:active {
   background-color: rgb(20, 20, 20, 80%);
   border-radius: 50%;
+}
+
+.quantityNotifications{
+  position: absolute;
+  top: 0;
+  background-color: gray;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 18;
 }
 
 @media screen and (max-width: 700px) {
