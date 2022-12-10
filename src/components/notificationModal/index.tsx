@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { card, notificationModalProps } from "../../types";
 import NotificationCard from "../notificationCard";
 import "./index.css";
@@ -76,12 +76,12 @@ const mockData: card[] = [
 
 
 function NotificationModal(props: notificationModalProps) {
-    const [data, setData] = useState<card[]>(mockData)
+    const [data, /*setData*/] = useState<card[]>(mockData)
     const [readItems, setReadItems] = useState<number[]>([])
 
-    useEffect(() => {
-        setData(mockData)
-    }, [mockData])
+    // useEffect(() => {
+    //     setData(mockData)
+    // }, [mockData])
 
     const checkRead = (index: number) => {
         return readItems.indexOf(index)
