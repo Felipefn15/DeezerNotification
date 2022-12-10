@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { card, notificationModalProps } from "../../types";
 import NotificationCard from "../notificationCard";
 import "./index.css";
@@ -79,9 +79,9 @@ function NotificationModal(props: notificationModalProps) {
     const [data, /*setData*/] = useState<card[]>(mockData)
     const [readItems, setReadItems] = useState<number[]>([])
 
-    // useEffect(() => {
-    //     setData(mockData)
-    // }, [mockData])
+    useEffect(() => {
+        localStorage.setItem('quantity', JSON.stringify(data.length - readItems.length));
+    },)
 
     const checkRead = (index: number) => {
         return readItems.indexOf(index)
@@ -95,6 +95,8 @@ function NotificationModal(props: notificationModalProps) {
         else
             newRead.push(index)
         setReadItems(newRead)
+        localStorage.setItem('quantity', JSON.stringify(data.length - newRead.length));
+        window.dispatchEvent(new Event("storage"));
     }
 
     if (props.show)
