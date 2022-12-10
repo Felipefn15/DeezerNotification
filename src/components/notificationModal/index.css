@@ -69,3 +69,11 @@
   font-weight: 600;
   text-align: center;
 }
+
+
+@media screen and (max-width: 500px) {
+  .modalWrapper {
+    right: 1%;
+    width: 95%;
+  }
+}
