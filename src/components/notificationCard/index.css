@@ -63,6 +63,7 @@
 .mailIcon {
   width: 30px;
   height: 30px;
+  filter: invert(100%);
 }
 
 .footerWrapper {
