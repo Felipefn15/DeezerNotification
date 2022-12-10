@@ -76,12 +76,29 @@ const mockData: card[] = [
 
 
 function NotificationModal(props: notificationModalProps) {
-    const [data, /*setData*/] = useState<card[]>(mockData)
+    const [data, setData] = useState<card[]>(mockData)
     const [readItems, setReadItems] = useState<number[]>([])
+
+
+    function isScrolling(event: any) {
+        if (event.currentTarget.offsetHeight + event.currentTarget.scrollTop !== event.currentTarget.scrollHeight) {
+            return;
+        }
+        else {
+            const newData = data
+            newData.push(...data)
+            setData(newData)
+            localStorage.setItem('quantity', JSON.stringify(newData.length - readItems.length));
+            window.dispatchEvent(new Event("storage"));
+        }
+    }
 
     useEffect(() => {
         localStorage.setItem('quantity', JSON.stringify(data.length - readItems.length));
+        window.addEventListener("scroll", isScrolling);
+        return () => window.removeEventListener("scroll", isScrolling);
     },)
+
 
     const checkRead = (index: number) => {
         return readItems.indexOf(index)
@@ -106,7 +123,7 @@ function NotificationModal(props: notificationModalProps) {
                     <div className="titleWrapper">
                         <p className="title">Notifications</p>
                     </div>
-                    <div className="cardsWrapper">
+                    <div className="cardsWrapper" onScroll={isScrolling}>
                         {data.length > 0 ?
                             data.map((card, index) => {
                                 return (

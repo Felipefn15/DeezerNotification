@@ -13,7 +13,7 @@ function NotificationCard(props: notificationCardProps) {
     }
 
     return (
-        <div className={"cardWrapper"}>
+        <button className={"cardWrapper"} onClick={readCard}>
             <div className="cardPrincipal">
                 <div className="infoWrapper">
                     <img
@@ -27,19 +27,19 @@ function NotificationCard(props: notificationCardProps) {
                     </div>
                 </div>
                 <div>
-                    <button className="readButton" onClick={readCard}>
+                    <div className="readButton">
                         {
                             read ?
                                 <img src={readIcon} className="mailIcon" alt="Read Icon" /> :
                                 <img src={unreadIcon} className="mailIcon" alt="Unread Icon" />
                         }
-                    </button>
+                    </div>
                 </div>
             </div>
             <div className="footerWrapper">
                 <p className="footerText">{props.card.attachedContent?.date} - New {props.card.attachedContent?.type}</p>
             </div>
-        </div >
+        </button >
     )
 }
 
