@@ -77,10 +77,26 @@ const mockData: card[] = [
 
 function NotificationModal(props: notificationModalProps) {
     const [data, setData] = useState<card[]>(mockData)
+    const [readItems, setReadItems] = useState<number[]>([])
 
     useEffect(() => {
         setData(mockData)
     }, [mockData])
+
+    const checkRead = (index: number) => {
+        return readItems.indexOf(index)
+    }
+
+    const insertReadCard = (index: number) => {
+        const newRead = readItems
+        const position = checkRead(index)
+        if (position > -1)
+            newRead.splice(position, 1)
+        else
+            newRead.push(index)
+        console.log(newRead)
+        setReadItems(newRead)
+    }
 
     if (props.show)
         return (
@@ -91,9 +107,9 @@ function NotificationModal(props: notificationModalProps) {
                     </div>
                     <div className="cardsWrapper">
                         {data.length > 0 ?
-                            data.map((card) => {
+                            data.map((card, index) => {
                                 return (
-                                    <NotificationCard card={card} />
+                                    <NotificationCard key={index} card={card} read={() => insertReadCard(index)} wasRead={checkRead(index) > -1} />
                                 )
                             })
                             :
