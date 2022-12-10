@@ -94,7 +94,6 @@ function NotificationModal(props: notificationModalProps) {
             newRead.splice(position, 1)
         else
             newRead.push(index)
-        console.log(newRead)
         setReadItems(newRead)
     }
 
