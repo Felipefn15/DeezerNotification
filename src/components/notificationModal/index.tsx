@@ -42,7 +42,6 @@ function NotificationModal(props: notificationModalProps) {
                     }
                     newData.push(newCard)
                 })
-                console.log(newData)
                 setData(newData)
                 localStorage.setItem('quantity', JSON.stringify(newData.length - readItems.length));
                 window.dispatchEvent(new Event("storage"));
