@@ -12,6 +12,14 @@ function NotificationModal(props: notificationModalProps) {
     const [hide] = useState(false) //If change this for true, will be able to see how the component deal with empty data
     const [readItems, setReadItems] = useState<number[]>([])//Control the list of read items
 
+
+    /**
+     * Generate random new dates so the notifications don't look the same
+     */
+    const randomDate = (start: Date, end: Date) => {
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    }
+
     /*
     *   Used to create the Infinity Scroll fealing, everytime that hits the bottom
     *   will be added more itens until get bigger than 90 itens
@@ -27,8 +35,14 @@ function NotificationModal(props: notificationModalProps) {
                 mockData.forEach((card) => {
                     const newCard = { ...card }
                     newCard.id = newData.length
+                    if (newCard?.attachedContent) {
+                        const attachedContent = { ...newCard.attachedContent }
+                        attachedContent.date = randomDate(randomDate(new Date(2018, 0, 1), new Date()), new Date());
+                        newCard.attachedContent = attachedContent
+                    }
                     newData.push(newCard)
                 })
+                console.log(newData)
                 setData(newData)
                 localStorage.setItem('quantity', JSON.stringify(newData.length - readItems.length));
                 window.dispatchEvent(new Event("storage"));
@@ -85,7 +99,7 @@ function NotificationModal(props: notificationModalProps) {
     const getSortedData = () => {
         return data.sort((card1, card2) => {
             if (card1.attachedContent?.date && card2.attachedContent?.date) {
-                return new Date(card1.attachedContent.date).getTime() - new Date(card2.attachedContent.date).getTime()
+                return new Date(card2.attachedContent.date).getTime() - new Date(card1.attachedContent.date).getTime()
             }
 
             else
