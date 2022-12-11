@@ -16,12 +16,12 @@ function NotificationCard(props: notificationCardProps) {
         props.read()
     }
 
-  /*
-  * Create the Date text based on the diff between today and the card content date
-  * After checks which period should use and return the text, checking first if is singular or plural
-  */
+    /*
+    * Create the Date text based on the diff between today and the card content date
+    * After checks which period should use and return the text, checking first if is singular or plural
+    */
     const returnDateText = () => {
-        const diffTime = props.card.attachedContent?.date ? Math.abs(new Date().getTime() - props.card.attachedContent?.date.getTime()) : 0;
+        const diffTime = props.card.attachedContent?.date ? Math.abs(new Date().getTime() - new Date(props.card.attachedContent?.date).getTime()) : 0;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         if (diffDays < 7) {
             return `${diffDays} ${diffDays > 1 ? "DAYS" : "DAY"} AGO`
@@ -65,7 +65,8 @@ function NotificationCard(props: notificationCardProps) {
                 </div>
             </div>
             <div className="footerWrapper">
-                <p className="footerText">{returnDateText()} - New {props.card.attachedContent?.type}</p>
+                {props.card.description && <p className="footerText bolder">{props.card.description}</p>}
+                <p className="footerText">{returnDateText()} - {props.card.type} {props.card.attachedContent?.type}</p>
             </div>
         </button >
     )

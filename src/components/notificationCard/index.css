@@ -74,7 +74,13 @@
 
 .footerText {
   color: #5a5a63;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 200;
   text-transform: uppercase;
+  margin-top: 5px;
+  margin-bottom: 2px;
+}
+
+.bolder{
+  font-weight: 700;
 }

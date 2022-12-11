@@ -2,82 +2,15 @@ import React, { useState, useEffect } from "react";
 import { card, notificationModalProps } from "../../types";
 import NotificationCard from "../notificationCard";
 import "./index.css";
-import khalidImage from "../../assets/mock/khalid.png"
-import imagineDragon from "../../assets/mock/imgdrg.png"
-import samSmith from "../../assets/mock/sm.png"
-import marronFive from "../../assets/mock/mr5.png"
-import arianaGrande from "../../assets/mock/argr.png"
-import podcast from "../../assets/mock/podcast.jpg"
+import mockDataJson from "../../mockData.json"
+
 //Mock Initial Data
-const mockData: card[] = [
-    {
-        type: "recommendation",
-        attachedContent: {
-            title: "Free Spirit",
-            subtitle: "Khalid",
-            date: new Date("10/10/2022"),
-            type: "Album",
-            image: khalidImage
-        },
-    },
-    {
-        type: "sharing",
-        attachedContent: {
-            title: "Origins",
-            subtitle: "Imagine Dragons",
-            date: new Date("10/20/2022"),
-            type: "Album",
-            image: imagineDragon
-        },
-    },
-    {
-        type: "update",
-        attachedContent: {
-            title: "Unholly",
-            subtitle: "Sam Smith",
-            date: new Date("10/30/2022"),
-            type: "Single",
-            image: samSmith
-        },
-    },
-    {
-        type: "update",
-        attachedContent: {
-            title: "This is",
-            subtitle: "Marron Five",
-            date: new Date("11/10/2022"),
-            type: "Playlist",
-            image: marronFive
-        },
-    },
-    {
-        type: "newContent",
-        attachedContent: {
-            title: "Sweetener",
-            subtitle: "Ariana Grande",
-            date: new Date("11/30/2022"),
-            type: "Album",
-            image: arianaGrande
-        },
-    },
-    {
-        type: "recommendation",
-        attachedContent: {
-            title: "StarTalk",
-            subtitle: "Neil deGrasse Tyson",
-            date: new Date("12/10/2022"),
-            type: "Podcast",
-            image: podcast
-        },
-    },
-
-]
-
+const mockData: card[] = JSON.parse(JSON.stringify(mockDataJson))
 
 function NotificationModal(props: notificationModalProps) {
     const [data, setData] = useState<card[]>([])//State will be use as the storage of data
     const [hide] = useState(false) //If change this for true, will be able to see how the component deal with empty data
-    const [readItems, setReadItems] = useState<number[]>([])//Control the list of read items, using the 
+    const [readItems, setReadItems] = useState<number[]>([])//Control the list of read items
 
     /*
     *   Used to create the Infinity Scroll fealing, everytime that hits the bottom
@@ -151,8 +84,10 @@ function NotificationModal(props: notificationModalProps) {
     */
     const getSortedData = () => {
         return data.sort((card1, card2) => {
-            if (card1.attachedContent?.date && card2.attachedContent)
-                return card1.attachedContent.date.getTime() - card2.attachedContent.date.getTime()
+            if (card1.attachedContent?.date && card2.attachedContent?.date) {
+                return new Date(card1.attachedContent.date).getTime() - new Date(card2.attachedContent.date).getTime()
+            }
+
             else
                 return 1
         })
