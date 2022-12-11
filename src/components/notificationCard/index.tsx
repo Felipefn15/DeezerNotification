@@ -5,7 +5,7 @@ import unreadIcon from "../../assets/unread.png"
 import readIcon from "../../assets/read.png"
 
 function NotificationCard(props: notificationCardProps) {
-    const [read, setRead] = useState(props.wasRead)
+    const [read, setRead] = useState(props.wasRead) //Control the mail icon state
 
     /*
     * Control read state to change the mail icon on the card
@@ -23,7 +23,6 @@ function NotificationCard(props: notificationCardProps) {
     const returnDateText = () => {
         const diffTime = props.card.attachedContent?.date ? Math.abs(new Date().getTime() - props.card.attachedContent?.date.getTime()) : 0;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        console.log({ card: props.card, diffDays })
         if (diffDays < 7) {
             return `${diffDays} ${diffDays > 1 ? "DAYS" : "DAY"} AGO`
         }

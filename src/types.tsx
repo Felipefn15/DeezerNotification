@@ -29,6 +29,7 @@ export interface card {
     attachedContent?: content,
     validPeriod?: string,
     description?: string,
+    id?: number
 }
 
 export interface notificationCardProps {

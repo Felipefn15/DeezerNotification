@@ -6,8 +6,8 @@ import user from "../../assets/user.png"
 import NotificationModal from "../notificationModal";
 
 function Header() {
-  const [openModal, setOpenModal] = useState(false)
-  const [quantity, setQuantity] = useState(0)
+  const [openModal, setOpenModal] = useState(false) //Control the modal
+  const [quantity, setQuantity] = useState(0) //Control the quantity of notifications the user has and show that on the badge if is bigger than 0
 
   /*
   * Get the first value on notifications quantity from local storage

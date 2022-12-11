@@ -75,9 +75,9 @@ const mockData: card[] = [
 
 
 function NotificationModal(props: notificationModalProps) {
-    const [data, setData] = useState<card[]>(mockData)
-    const [hide] = useState(false)
-    const [readItems, setReadItems] = useState<number[]>([])
+    const [data, setData] = useState<card[]>([])//State will be use as the storage of data
+    const [hide] = useState(false) //If change this for true, will be able to see how the component deal with empty data
+    const [readItems, setReadItems] = useState<number[]>([])//Control the list of read items, using the 
 
     /*
     *   Used to create the Infinity Scroll fealing, everytime that hits the bottom
@@ -91,18 +91,37 @@ function NotificationModal(props: notificationModalProps) {
         else {
             if (data.length < 90) {
                 const newData = data
-                newData.push(...mockData)
-                console.log({ newData })
+                mockData.forEach((card) => {
+                    const newCard = { ...card }
+                    newCard.id = newData.length
+                    newData.push(newCard)
+                })
                 setData(newData)
                 localStorage.setItem('quantity', JSON.stringify(newData.length - readItems.length));
                 window.dispatchEvent(new Event("storage"));
             }
         }
     }
+    /**
+     * Insert the mockData for the first time so the user can start with some data and create the id propety, 
+     * Even with repeated, will be able to sort and control the read propety in a correct way 
+     */
+    const startData = () => {
+        const newData = data
+        mockData.forEach((card, index) => {
+            const cardWithId = { ...card }
+            cardWithId.id = index
+            newData.push(cardWithId)
+        })
+        console.log(newData)
+        setData(newData)
+    }
 
     //Used to set the quantity of the notifications the first time after load the fake data
     useEffect(() => {
         localStorage.setItem('quantity', JSON.stringify(data.length - readItems.length));
+        if (data.length === 0)
+            startData()
     },)
 
     //This function check if the notification was read and return the array possition
@@ -115,8 +134,9 @@ function NotificationModal(props: notificationModalProps) {
     *   If is not there yet, will be added
     *   After that create the new list of read notifications and save this on local storage
     */
-    const insertReadCard = (index: number) => {
+    const insertReadCard = (card: card) => {
         const newRead = readItems
+        const index = card.id ?? 0
         const position = checkRead(index)
         if (position > -1)
             newRead.splice(position, 1)
@@ -153,7 +173,7 @@ function NotificationModal(props: notificationModalProps) {
                         {data.length > 0 && !hide ?
                             getSortedData().map((card, index) => {
                                 return (
-                                    <NotificationCard key={index} card={card} read={() => insertReadCard(index)} wasRead={checkRead(index) > -1} />
+                                    <NotificationCard key={index} card={card} read={() => insertReadCard(card)} wasRead={checkRead(index) > -1} />
                                 )
                             })
                             :

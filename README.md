@@ -1,7 +1,8 @@
-# Getting Started with Create React App
+# Deezer Notification
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created following all the intructions on the code challenge.
 
+The Idea is to show a good controll of notificantios and a responsivity design and performance
 ## Available Scripts
 
 In the project directory, you can run:
