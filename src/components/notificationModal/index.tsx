@@ -113,13 +113,12 @@ function NotificationModal(props: notificationModalProps) {
             cardWithId.id = index
             newData.push(cardWithId)
         })
-        console.log(newData)
         setData(newData)
+        localStorage.setItem('quantity', JSON.stringify(newData.length - readItems.length));
     }
 
     //Used to set the quantity of the notifications the first time after load the fake data
     useEffect(() => {
-        localStorage.setItem('quantity', JSON.stringify(data.length - readItems.length));
         if (data.length === 0)
             startData()
     },)
